@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <!-- HOME -->
+        <div class="module module-header bg-dark bg-dark-50" data-background="{{ asset('theme/assets/images/section-7.jpg') }}">
+
+            <div class="container">
+
+                <!-- MODULE TITLE -->
+                <div class="row">
+
+                    <div class="col-sm-6 col-sm-offset-3">
+
+                        <h1 class="module-title font-alt align-center">{{ 'Blog grid'|trans }}</h1>
+
+                        <div class="module-subtitle font-inc align-center">
+                            {{ 'A wonderful serenity'|trans }}
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /MODULE TITLE -->
+
+            </div>
+
+        </div>
+        <!-- /HOME -->
+
+        <!-- BLOG GRID -->
+        <div class="pdd-88-n module-small p-b-0">
+            <div class="container">
+                <div class="row multi-columns-row post-columns">
+
+                    {% for post in posts %}
+                    <!-- POST ITEM -->
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="post">
+                            <div class="post-thumbnail">
+                                <a href="{{ path('app_blog_show', {'slug':post.slug}) }}">
+                                    <img src="{{ asset(post.thumbnail) }}" alt="">
+                                </a>
+                            </div>
+                            <div class="post-header">
+                                <h2 class="post-title font-alt">
+                                    <a href="{{ path('app_blog_show', {'slug':post.slug}) }}">{{ post.title }}</a>
+                                </h2>
+                                <div class="post-meta font-inc">
+                                    {{ post.createdAt|date('d-m-Y')}}
+                                </div>
+                            </div>
+                            <div class="post-entry">
+                                <p>
+                                    {{ post.synopsis }}
+                                </p>
+                            </div>
+                            <div class="post-more font-inc">
+                                <a href="{{ path('app_blog_show', {'slug':post.slug}) }}" class="more-link">{{ 'Read more'|trans }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /POST ITEM -->
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div >
+        <!-- /BLOG GRID -->
+
+        <!-- PAGINATION -->
+        <div class="module-small p-t-10">
+
+            <div class="container">
+
+                <div class="pagination font-inc text-uppercase">
+
+                    <a href="#"><i class="fa fa-angle-left"></i> {{ 'Prev'|trans }}</a>
+                    <a href="#">{{ 'Next'|trans }} <i class="fa fa-angle-right"></i></a>
+
+                </div>
+
+            </div>
+
+        </div >
+        <!-- /PAGINATION -->
+
+
+
+{% endblock %}

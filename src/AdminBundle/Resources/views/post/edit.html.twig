@@ -1,0 +1,45 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block body %}
+    <h3>Post edit</h3>
+
+    {{ form_start(edit_form) }}
+        {{ form_row(edit_form.title)}}
+
+        <button class="btn" type="button" data-toggle="collapse" data-target="#titleEn" aria-expanded="false" aria-controls="collapseExample">Anglais</button>
+        <div class="collapse" id="titleEn">{{ form_row(edit_form.titleEn)}}</div>
+
+        {{ form_row(edit_form.slug)}}
+
+        <button class="btn" type="button" data-toggle="collapse" data-target="#slugEn" aria-expanded="false" aria-controls="collapseExample">Anglais</button>
+        <div class="collapse" id="slugEn">{{ form_row(edit_form.slugEn)}}</div>
+
+        {{ form_row(edit_form.createdAt)}}
+
+        {{ form_row(edit_form.synopsis)}}
+
+        <button class="btn" type="button" data-toggle="collapse" data-target="#synopsisEn" aria-expanded="false" aria-controls="collapseExample">Anglais</button>
+        <div class="collapse" id="synopsisEn">{{ form_row(edit_form.synopsisEn)}}</div>
+
+        {{ form_row(edit_form.body)}}
+
+        <button class="btn" type="button" data-toggle="collapse" data-target="#bodyEn" aria-expanded="false" aria-controls="collapseExample">Anglais</button>
+        <div class="collapse" id="bodyEn">{{ form_row(edit_form.bodyEn)}}</div>
+
+        {{ form_row(edit_form.thumbnail)}}
+        {{ form_row(edit_form.cover)}}
+
+        <input class='btn btn-success' type="submit" value="Edit" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('post_index') }}">Back to the list</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class='btn btn-warning'>
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

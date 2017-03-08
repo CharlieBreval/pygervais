@@ -1,0 +1,40 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block body %}
+    <h3>Post creation</h3>
+
+
+    {{ form_start(form) }}
+        {{ form_row(form.title)}}
+
+        <button class="btn" type="button" data-toggle="collapse" data-target="#titleEn" aria-expanded="false" aria-controls="collapseExample">Anglais</button>
+        <div class="collapse" id="titleEn">{{ form_row(form.titleEn)}}</div>
+
+        {{ form_row(form.slug)}}
+
+        <button class="btn" type="button" data-toggle="collapse" data-target="#slugEn" aria-expanded="false" aria-controls="collapseExample">Anglais</button>
+        <div class="collapse" id="slugEn">{{ form_row(form.slugEn)}}</div>
+
+        {{ form_row(form.createdAt)}}
+
+        {{ form_row(form.synopsis)}}
+
+        <button class="btn" type="button" data-toggle="collapse" data-target="#synopsisEn" aria-expanded="false" aria-controls="collapseExample">Anglais</button>
+        <div class="collapse" id="synopsisEn">{{ form_row(form.synopsisEn)}}</div>
+
+        {{ form_row(form.body)}}
+
+        <button class="btn" type="button" data-toggle="collapse" data-target="#bodyEn" aria-expanded="false" aria-controls="collapseExample">Anglais</button>
+        <div class="collapse" id="bodyEn">{{ form_row(form.bodyEn)}}</div>
+
+        {{ form_row(form.thumbnail)}}
+        {{ form_row(form.cover)}}
+
+        <input class='btn btn-success' type="submit" value="Create" />
+    {{ form_end(form) }}
+    <ul>
+        <li>
+            <a href="{{ path('post_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

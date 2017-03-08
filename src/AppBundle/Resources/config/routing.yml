@@ -1,0 +1,11 @@
+app_home:
+    path:      /{_locale}
+    defaults:  { _controller: AppBundle:Home:index, _locale: en}
+    requirements:
+        _locale: en|fr
+
+app_blog_show:
+    path:      /{_locale}/blog/{slug}
+    defaults:  { _controller: AppBundle:Blog:show, _locale: en}
+    requirements:
+        _locale: en|fr
