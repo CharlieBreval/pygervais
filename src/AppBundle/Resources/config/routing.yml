@@ -4,6 +4,18 @@ app_home:
     requirements:
         _locale: en|fr
 
+app_contact:
+    path:      /{_locale}/contact
+    defaults:  { _controller: AppBundle:Contact:contact, _locale: en}
+    requirements:
+        _locale: en|fr
+
+app_portfolio:
+    path:      /{_locale}/portfolio/{categorySlug}/{subcategorySlug}
+    defaults:  { _controller: AppBundle:Portfolio:portfolio, _locale: en}
+    requirements:
+        _locale: en|fr
+
 app_blog_show:
     path:      /{_locale}/blog/{slug}
     defaults:  { _controller: AppBundle:Blog:show, _locale: en}

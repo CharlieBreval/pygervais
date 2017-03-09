@@ -4,6 +4,7 @@
     <h3>Painting edit</h3>
 
     {{ form_start(edit_form) }}
+        {{ form_row(edit_form.subcategory)}}
         {{ form_row(edit_form.title)}}
         <button class="btn" type="button" data-toggle="collapse" data-target="#titleEn" aria-expanded="false" aria-controls="collapseExample">
             Anglais

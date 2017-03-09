@@ -22,6 +22,11 @@ class Post
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
+     */
+    private $comments;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
@@ -97,6 +102,13 @@ class Post
      * @ORM\Column(name="cover", type="string", length=255)
      */
     private $cover;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -370,5 +382,39 @@ class Post
     public function getCover()
     {
         return $this->cover;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AdminBundle\Entity\Comment $comment
+     *
+     * @return Post
+     */
+    public function addComment(\AdminBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AdminBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AdminBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

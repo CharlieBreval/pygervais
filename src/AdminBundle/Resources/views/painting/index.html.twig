@@ -23,14 +23,7 @@
                 <td>{{ painting.image }}</td>
                 <td>{% if painting.createdAt %}{{ painting.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('painting_show', { 'id': painting.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('painting_edit', { 'id': painting.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('painting_edit', { 'id': painting.id }) }}">edit</a>
                 </td>
             </tr>
         {% endfor %}

@@ -17,6 +17,7 @@ class PaintingType extends AbstractType
         $builder
             ->add('title')
             ->add('titleEn')
+            ->add('subcategory')
             ->add('thumbnail')
             ->add('image')
             ->add('createdAt')

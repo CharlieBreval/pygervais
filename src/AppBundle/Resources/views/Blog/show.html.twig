@@ -14,35 +14,18 @@
                     <div class="post margin_top_rb">
 
                         <div class="post-thumbnail">
-                            <a href="blog-single.html"><img src="{{ asset('theme/assets/images/post-1.jpg') }}" alt=""></a>
+                            <img src="{{ asset(post.cover) }}" alt="">
                         </div>
 
                         <div class="post-header">
-                            <h1 class="post-title font-alt"><a href="blog-single.html">Post with image</a></h1>
+                            <h1 class="post-title font-alt"><a href="blog-single.html">{{ post.title }}</a></h1>
                             <div class="post-meta font-inc">
-                                By <a href="#">Michael Goodman</a> | 14  FEB 2017 | 3 Comments | <a href="#">Photography</a>, <a href="#">Web Design</a>
+                                {{ post.createdAt|date('d-m-Y') }} | {{ post.comments|length }} {{ 'Comments'|trans }}
                             </div>
                         </div>
 
                         <div class="post-entry">
-
-                            <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words.</p>
-
-                            <p>Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators. To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words.</p>
-
-                            <blockquote>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                            </blockquote>
-
-                            <p>If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental.</p>
-
-                            <ul>
-                                <li>The European languages are members of the same family.</li>
-                                <li>Their separate existence is a myth.</li>
-                                <li>For science, music, sport, etc, Europe uses the same vocabulary.</li>
-                            </ul>
-
-                            <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words.</p>
+                            {{ post.body|raw }}
 
                         </div>
 
@@ -50,111 +33,56 @@
                     <!-- /POST -->
 
                     <!-- COMMENTS-->
+                    {% if post.comments|length > 0 %}
                     <div class="comments">
-                        <h4 class="comment-title font-alt">3 comments</h4>
+                        <h4 class="comment-title font-alt">{{ post.comments|length}} {{'comments'|trans }}</h4>
 
+                        {% for comment in post.comments %}
                         <!-- COMMENT 1 -->
                         <div class="comment clearfix">
 
-                            <div class="comment-avatar">
-                                <img src="{{ asset('theme/assets/images/t1.jpg') }}" alt="avatar">
-                            </div>
-
                             <div class="comment-content clearfix">
 
                                 <div class="comment-author font-inc">
-                                    <a href="#">John Book</a>
+                                    {{ comment.createdBy }}
                                 </div>
 
                                 <div class="comment-body">
-                                    <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The European languages are members of the same family. Their separate existence is a myth.</p>
+                                    <p>{{ comment.body }}</p>
                                 </div>
 
                                 <div class="comment-meta font-inc">
-                                    Today, 5 hours ago - <a href="#">Reply <i class="fa fa-angle-right"></i></a>
+                                    {{ comment.createdAt|date('d-m-Y') }}
                                 </div>
 
                             </div>
-
-                            <!-- COMMENT 2 -->
-                            <div class="comment clearfix">
-
-                                <div class="comment-avatar">
-                                    <img src="{{ asset('theme/assets/images/t2.jpg') }}" alt="avatar">
-                                </div>
-
-                                <div class="comment-content clearfix">
-
-                                    <div class="comment-author font-inc">
-                                        <a href="#">Mark Stone</a>
-                                    </div>
-
-                                    <div class="comment-body">
-                                        <p>Europe uses the same vocabulary. The European languages are members of the same family. Their separate existence is a myth.</p>
-                                    </div>
-
-                                    <div class="comment-meta font-inc">
-                                        Today, 4 hours ago - <a href="#">Reply <i class="fa fa-angle-right"></i></a>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <!-- /COMMENT 2 -->
-
                         </div>
-                        <!-- /COMMENT 1 -->
-
-                        <!-- COMMENT 3 -->
-                        <div class="comment clearfix">
-
-                            <div class="comment-avatar">
-                                <img src="{{ asset('theme/assets/images/t3.jpg') }}" alt="avatar">
-                            </div>
-
-                            <div class="comment-content clearfix">
-
-                                <div class="comment-author font-inc">
-                                    <a href="#">Andy</a>
-                                </div>
-
-                                <div class="comment-body">
-                                    <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The European languages are members of the same family. Their separate existence is a myth.</p>
-                                </div>
-
-                                <div class="comment-meta font-inc">
-                                    Today, 2 hours ago - <a href="#">Reply <i class="fa fa-angle-right"></i></a>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <!-- /COMMENT 3 -->
+                        {% endfor %}
 
                     </div>
+                    {% endif %}
                     <!-- /COMMENTS -->
 
                     <!-- COMMENT FORM -->
                     <div class="comment-form">
-                        <h4 class="comment-form-title font-alt">Add your comment</h4>
+                        <h4 class="comment-form-title font-alt">{{ 'Add your comment'|trans }}</h4>
 
-                        <form method="post">
-
+                        <form method="POST" action="{{ path('app_blog_show', {'_locale': app.request.locale, 'slug': post.slug}) }}">
                             <div class="form-group">
-                                <label class="sr-only" for="name">Name</label>
-                                <input type="text" id="name" class="form-control" name="name" placeholder="Name">
+                                <label class="sr-only" for="name">{{ 'Name'|trans }}</label>
+                                <input type="text" id="name" class="form-control" name="name" placeholder="{{ 'Name'|trans }}">
                             </div>
 
                             <div class="form-group">
-                                <label class="sr-only" for="email">Name</label>
-                                <input type="text" id="email" class="form-control" name="email" placeholder="E-mail">
+                                <label class="sr-only" for="email">{{ 'Email'| trans }}</label>
+                                <input type="text" id="email" class="form-control" name="email" placeholder="{{ 'Email'| trans }}">
                             </div>
 
                             <div class="form-group">
-                                <textarea class="form-control" id="comment" name="comment" rows="6" placeholder="Comment"></textarea>
+                                <textarea class="form-control" id="comment" name="comment" rows="6" placeholder="{{ 'Comment'|trans }}"></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-round btn-g">Post comment</button>
+                            <button type="submit" class="btn btn-round btn-g">{{ 'Post comment'|trans }}</button>
 
                         </form>
 

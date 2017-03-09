@@ -17,8 +17,8 @@ class HomeController extends Controller
     public function indexAction(Request $request)
     {
         $posts = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Post')->findBy([], [
-            'createdAt' => 'DESC'
-        ]);
+            'createdAt' => 'DESC',
+        ], 10);
 
         return $this->render('AppBundle:Home:index.html.twig', [
             'posts' => $posts

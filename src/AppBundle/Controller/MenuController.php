@@ -16,6 +16,16 @@ class MenuController extends Controller
      */
     public function menuAction(Request $request)
     {
-        return $this->render('AppBundle:Menu:menu.html.twig', []);
+        $stack = $this->get('request_stack');
+        $masterRequest = $stack->getMasterRequest();
+        $currentRoute = $masterRequest->get('_route');
+
+        $categories = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Category')
+            ->findAll();
+
+        return $this->render('AppBundle:Menu:menu.html.twig', [
+            'currentRoute' => $currentRoute,
+            'categories' => $categories
+        ]);
     }
 }

@@ -22,6 +22,12 @@ class Painting
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Subcategory", inversedBy="paintings")
+     * @ORM\JoinColumn(name="subcategory_id", referencedColumnName="id")
+     */
+    private $subcategory;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
@@ -184,5 +190,29 @@ class Painting
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set subcategory
+     *
+     * @param \AdminBundle\Entity\Subcategory $subcategory
+     *
+     * @return Painting
+     */
+    public function setSubcategory(\AdminBundle\Entity\Subcategory $subcategory = null)
+    {
+        $this->subcategory = $subcategory;
+
+        return $this;
+    }
+
+    /**
+     * Get subcategory
+     *
+     * @return \AdminBundle\Entity\Subcategory
+     */
+    public function getSubcategory()
+    {
+        return $this->subcategory;
     }
 }
