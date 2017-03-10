@@ -12,9 +12,18 @@ class PortfolioController extends Controller
 {
     public function portfolioAction(Request $request, $categorySlug, $subcategorySlug)
     {
-        var_dump($subcategorySlug); die;
-        return $this->render('AppBundle:Blog:show.html.twig', [
-            'post' => $post
+        $manager = $this->getDoctrine()->getManager();
+        $category = $manager->getRepository('AdminBundle:Category')->findOneBy([
+            'slug' => $categorySlug
+        ]);
+
+        $subcategory = $manager->getRepository('AdminBundle:Subcategory')->findOneBy([
+            'category' => $category,
+            'slug' => $subcategorySlug
+        ]);
+
+        return $this->render('AppBundle:Portfolio:portfolio.html.twig', [
+            'subcategory' => $subcategory
         ]);
     }
 }

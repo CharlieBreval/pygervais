@@ -21,7 +21,12 @@ class MenuController extends Controller
         $currentRoute = $masterRequest->get('_route');
 
         $categories = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Category')
-            ->findAll();
+            ->createQueryBuilder('c')
+            ->innerJoin('c.subcategories', 'sc')
+            ->innerJoin('sc.paintings', 'p')
+            ->getQuery()
+            ->getResult()
+        ;
 
         return $this->render('AppBundle:Menu:menu.html.twig', [
             'currentRoute' => $currentRoute,
