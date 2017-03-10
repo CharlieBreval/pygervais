@@ -1,0 +1,40 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block body %}
+    <h1>Subcategory</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ subcategory.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ subcategory.title }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ subcategory.slug }}</td>
+            </tr>
+            <tr>
+                <th>Titleen</th>
+                <td>{{ subcategory.titleEn }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('subcategory_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('subcategory_edit', { 'id': subcategory.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

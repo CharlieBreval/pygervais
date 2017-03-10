@@ -1,0 +1,43 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block body %}
+    <h1>Subcategories list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Titleen</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for subcategory in subcategories %}
+            <tr>
+                <td><a href="{{ path('subcategory_show', { 'id': subcategory.id }) }}">{{ subcategory.id }}</a></td>
+                <td>{{ subcategory.title }}</td>
+                <td>{{ subcategory.slug }}</td>
+                <td>{{ subcategory.titleEn }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('subcategory_show', { 'id': subcategory.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('subcategory_edit', { 'id': subcategory.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('subcategory_new') }}">Create a new subcategory</a>
+        </li>
+    </ul>
+{% endblock %}
