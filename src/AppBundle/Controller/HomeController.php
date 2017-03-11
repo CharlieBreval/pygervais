@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends Controller
@@ -23,5 +24,20 @@ class HomeController extends Controller
         return $this->render('AppBundle:Home:index.html.twig', [
             'posts' => $posts
         ]);
+    }
+
+    /**
+     * @param  Request $request
+     * @return JsonResponse
+     */
+    public function likeAction(Request $request, $post_id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository('AdminBundle:Post')->find($post_id);
+        $post->increaseLikes();
+
+        $em->flush();
+
+        return new JsonResponse(['html' => $post->getLikes()]);
     }
 }

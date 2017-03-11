@@ -4,6 +4,10 @@ app_home:
     requirements:
         _locale: en|fr
 
+app_increase_likes:
+    path:      /increase-likes/{post_id}
+    defaults:  { _controller: AppBundle:Home:like}
+
 app_contact:
     path:      /{_locale}/contact
     defaults:  { _controller: AppBundle:Contact:contact, _locale: en}

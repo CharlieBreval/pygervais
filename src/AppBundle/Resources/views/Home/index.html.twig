@@ -46,7 +46,10 @@
                                     <a href="{{ path('app_blog_show', {'slug':post.slug}) }}">{{ post.title }}</a>
                                 </h2>
                                 <div class="post-meta font-inc">
-                                    {{ post.createdAt|date('d-m-Y')}}
+                                    {{ post.createdAt|date('d-m-Y')}} | 
+                                    <a class="increase-likes" href="{{ path('app_increase_likes', {'post_id':post.id }) }}">
+                                        <span aria-hidden="true" class="icon-heart"></span> <span class="counter">{{ post.likes }}</span>
+                                    </a>
                                 </div>
                             </div>
                             <div class="post-entry">
@@ -67,7 +70,23 @@
 
         </div >
         <!-- /BLOG GRID -->
+{% endblock %}
 
-
-
+{% block javascripts %}
+    {{ parent()}}
+    <script type="text/javascript">
+        $(function() {
+            $('body').on('click', '.increase-likes', function(e) {
+                e.preventDefault();
+                var thus = $(this);
+                var url = $(this).attr('href');
+                $.ajax({
+                  url: url,
+                  success: function(data) {
+                    thus.children('span.counter').text(data.html);
+                  }
+                });
+            })
+        });
+    </script>
 {% endblock %}

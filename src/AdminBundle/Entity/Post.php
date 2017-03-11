@@ -102,12 +102,27 @@ class Post
      * @ORM\Column(name="cover", type="string", length=255)
      */
     private $cover;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="likes", type="integer")
+     */
+    private $likes;
+
+    public function increaseLikes()
+    {
+        $this->setLikes($this->getLikes() + 1);
+    }
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setLikes(0);
     }
 
     /**
@@ -416,5 +431,29 @@ class Post
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set likes
+     *
+     * @param string $likes
+     *
+     * @return Post
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    /**
+     * Get likes
+     *
+     * @return string
+     */
+    public function getLikes()
+    {
+        return $this->likes;
     }
 }
