@@ -27,7 +27,7 @@ class PostType extends AbstractType
             ->add('slugEn')
             ->add('createdAt', DateType::class, array(
                 'years' => $years
-            ));
+            ))
             ->add('synopsis')
             ->add('synopsisEn')
             ->add('body',  CKEditorType::class)
