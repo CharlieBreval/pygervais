@@ -14,12 +14,19 @@ class PostType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $years = [];
+        for ($i=1980; $i < 2030; $i++) {
+            $years[] = $i;
+        }
+
         $builder
             ->add('title')
             ->add('titleEn')
             ->add('slug')
             ->add('slugEn')
-            ->add('createdAt')
+            ->add('createdAt', DateType::class, array(
+                'years' => $years
+            ));
             ->add('synopsis')
             ->add('synopsisEn')
             ->add('body',  CKEditorType::class)
