@@ -10,7 +10,6 @@
                 <th>Title</th>
                 <th>Slug</th>
                 <th>Createdat</th>
-                <th>Synopsis</th>
                 <th>Thumbnail</th>
                 <th>Cover</th>
                 <th>Actions</th>
@@ -23,7 +22,6 @@
                 <td>{{ post.title }}</td>
                 <td>{{ post.slug }}</td>
                 <td>{% if post.createdAt %}{{ post.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ post.synopsis }}</td>
                 <td>{{ post.thumbnail }}</td>
                 <td>{{ post.cover }}</td>
                 <td>
