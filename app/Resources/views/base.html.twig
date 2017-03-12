@@ -55,6 +55,7 @@
     </div>
 
     {% block javascripts %}
+
     <!-- Javascript files -->
     <script src="{{ asset('theme/assets/js/jquery-2.2.4.min.js') }}"></script>
     <script src="{{ asset('theme/assets/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -70,6 +71,26 @@
     <script src="{{ asset('theme/assets/js/smoothscroll.js') }}"></script>
     <script src="{{ asset('theme/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('theme/assets/js/custom.js') }}"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('body').on('click', '.increase-likes', function(e) {
+                e.preventDefault();
+                var thus = $(this);
+                var url = $(this).attr('href');
+                if (!thus.hasClass('clicked')) {
+                    $.ajax({
+                      url: url,
+                      success: function(data) {
+                        thus.addClass('clicked');
+                        thus.children('span.counter').text(data.html);
+                      }
+                    });
+                }
+            })
+        });
+    </script>
+
     {% endblock %}
 
 </body>

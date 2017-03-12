@@ -98,21 +98,3 @@
     </div >
     <!-- /BLOG STANDART 2 -->
 {% endblock %}
-{% block javascripts %}
-    {{ parent()}}
-    <script type="text/javascript">
-        $(function() {
-            $('body').on('click', '.increase-likes', function(e) {
-                e.preventDefault();
-                var thus = $(this);
-                var url = $(this).attr('href');
-                $.ajax({
-                  url: url,
-                  success: function(data) {
-                    thus.children('span.counter').text(data.html);
-                  }
-                });
-            })
-        });
-    </script>
-{% endblock %}
