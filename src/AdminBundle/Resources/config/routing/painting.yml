@@ -1,7 +1,6 @@
 painting_index:
     path:     /
     defaults: { _controller: "AdminBundle:Painting:index" }
-    methods:  GET
 
 painting_show:
     path:     /{id}/show

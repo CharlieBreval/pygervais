@@ -3,6 +3,7 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\Entity\Painting;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,14 +17,30 @@ class PaintingController extends Controller
      * Lists all painting entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $paintings = $em->getRepository('AdminBundle:Painting')->findAll();
+        $filters = $this->createFormBuilder()
+            ->add('subcategory', EntityType::class, array(
+                'class' => 'AdminBundle:Subcategory'
+            ))
+        ->getForm();
+
+        $filters->handleRequest($request);
+
+        if ($filters->isSubmitted() && $filters->isValid()) {
+            $paintings = $em->getRepository('AdminBundle:Painting')->findBy([
+                'subcategory' => $filters->get('subcategory')->getData()
+            ]);
+        } else {
+            $paintings = $em->getRepository('AdminBundle:Painting')->findAll();
+        }
+
 
         return $this->render('AdminBundle:painting:index.html.twig', array(
             'paintings' => $paintings,
+            'filters'   => $filters->createView(),
         ));
     }
 

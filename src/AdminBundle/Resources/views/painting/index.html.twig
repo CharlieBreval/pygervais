@@ -3,6 +3,17 @@
 {% block body %}
     <h3>Paintings list</h3>
 
+    {{ form_start(filters)}}
+    <div class="row">
+        <div class="col-sm-8">
+            {{ form_widget(filters.subcategory)}}
+        </div>
+        <div class="col-sm-4">
+            <input type="submit" value="Filtrer" class="btn btn-info">
+        </div>
+    </div>
+    {{ form_end(filters)}}
+
     <a href="{{ path('painting_new') }}">Create a new painting</a>
 
     <table class="table table-bordered table-striped">
