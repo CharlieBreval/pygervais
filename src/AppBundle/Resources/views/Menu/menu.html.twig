@@ -20,7 +20,7 @@
                     <li><a href="{{ path('app_home', {'_locale': app.request.locale }) }}">{{ 'Home'|trans }}</a></li>
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ "Portfolio"|trans }}</a>
                         <ul class="dropdown-menu" role="menu">
 
                             {% for category in categories %}
@@ -28,7 +28,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ category.title }}</a>
                                 <ul class="dropdown-menu">
                                     {% for subcategory in category.subcategories %}
-                                    <li><a href="{{ path('app_portfolio', {'_locale':app.request.locale, 'categorySlug':category.slug, 'subcategorySlug': subcategory.slug}) }}">{{ subcategory.title }}</a></li>
+                                        <li><a href="{{ path('app_home', {'_locale':app.request.locale}) }}">{{ subcategory.title }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </li>
@@ -36,6 +36,16 @@
                         </ul>
                     </li>
                     <li><a href="{{ path('app_contact', {'_locale': app.request.locale})}}">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.request.locale }}</a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% for locale in ['fr', 'en'] %}
+                                <li>
+                                    <a href="{{ path('app_home', {'_locale': locale})}}">{{ ('menu_locale.'~locale)| trans }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
 
                 </ul>
             </div>

@@ -29,8 +29,8 @@ class MenuController extends Controller
         ;
 
         return $this->render('AppBundle:Menu:menu.html.twig', [
-            'currentRoute' => $currentRoute,
-            'categories' => $categories
+            'categories' => $categories,
+            'currentRoute' => $currentRoute
         ]);
     }
 }

@@ -17,6 +17,8 @@ class HomeController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $stack = $this->get('request_stack');
+        $masterRequest = $stack->getMasterRequest();
         $posts = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Post')->findBy([], [
             'createdAt' => 'DESC',
         ], 10);
