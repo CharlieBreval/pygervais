@@ -5,6 +5,7 @@ namespace AdminBundle\Form;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,9 +33,13 @@ class PostType extends AbstractType
             ->add('synopsisEn')
             ->add('body',  CKEditorType::class)
             ->add('bodyEn',  CKEditorType::class)
-            ->add('thumbnail')
-            ->add('cover')
         ;
+
+        if ($options['type'] !== null && $options['type'] === 'new') {
+            $builder
+                ->add('thumbnail', FileType::class, array('label' => 'Image miniature'))
+                ->add('cover', FileType::class, array('label' => 'Image grand format'))
+        }
     }
 
     /**
@@ -43,6 +48,7 @@ class PostType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+            'type' => null,
             'data_class' => 'AdminBundle\Entity\Post'
         ));
     }

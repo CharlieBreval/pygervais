@@ -19,3 +19,6 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
     painting_thumbnail_directory: '%kernel.root_dir%/../web/img/uploads/painting/thumbnail'
     painting_image_directory: '%kernel.root_dir%/../web/img/uploads/painting/image'
+
+    post_thumbnail_directory: '%kernel.root_dir%/../web/img/uploads/post/thumbnail'
+    post_cover_directory: '%kernel.root_dir%/../web/img/uploads/post/cover'

@@ -34,10 +34,32 @@ class PostController extends Controller
     public function newAction(Request $request)
     {
         $post = new Post();
-        $form = $this->createForm('AdminBundle\Form\PostType', $post);
+        $form = $this->createForm('AdminBundle\Form\PostType', $post, [
+            'type' => 'new'
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $thumbnail = $post->getThumbnail();
+            $cover = $post->getCover();
+
+            $thumbnailFilename = random_int(0, 100).'_'.$thumbnail->getClientOriginalName();
+            $thumbnail->move(
+                $this->getParameter('post_thumbnail_directory'),
+                $thumbnailFilename
+            );
+
+            $coverFilename = random_int(0, 100).'_'.$cover->getClientOriginalName();
+            $cover->move(
+                $this->getParameter('post_cover_directory'),
+                $coverFilename
+            );
+
+            $post->setCover('img/uploads/post/cover/'.$coverFilename);
+            $post->setThumbnail('img/uploads/post/thumbnail/'.$thumbnailFilename);
+
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush($post);
@@ -72,7 +94,10 @@ class PostController extends Controller
     public function editAction(Request $request, Post $post)
     {
         $deleteForm = $this->createDeleteForm($post);
-        $editForm = $this->createForm('AdminBundle\Form\PostType', $post);
+        $editForm = $this->createForm('AdminBundle\Form\PostType', $post, [
+            'type' => 'edit'
+        ]);
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
