@@ -52,7 +52,10 @@ class PaintingController extends Controller
     public function newAction(Request $request)
     {
         $painting = new Painting();
-        $form = $this->createForm('AdminBundle\Form\PaintingType', $painting);
+        $form = $this->createForm('AdminBundle\Form\PaintingType', $painting, [
+            'type' => 'new'
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -104,19 +107,14 @@ class PaintingController extends Controller
 
     /**
      * Displays a form to edit an existing painting entity.
-     *
      */
     public function editAction(Request $request, Painting $painting)
     {
-        $painting->setImage(
-            new File($this->getParameter('painting_image_directory').'/'.$painting->getImage())
-        );
-        $painting->setThumbnail(
-            new File($this->getParameter('painting_thumbnail_directory').'/'.$painting->getThumbnail())
-        );
-
         $deleteForm = $this->createDeleteForm($painting);
-        $editForm = $this->createForm('AdminBundle\Form\PaintingType', $painting);
+        $editForm = $this->createForm('AdminBundle\Form\PaintingType', $painting, [
+            'type' => 'edit'
+        ]);
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

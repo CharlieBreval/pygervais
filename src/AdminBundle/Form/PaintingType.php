@@ -25,12 +25,17 @@ class PaintingType extends AbstractType
             ->add('title')
             ->add('titleEn')
             ->add('subcategory')
-            ->add('thumbnail', FileType::class, array('label' => 'Image miniature 300px / 300px'))
-            ->add('image', FileType::class, array('label' => 'Image grand format'))
             ->add('createdAt', DateType::class, array(
                 'years' => $years
             ));
         ;
+
+        if ($options['type'] !== null && $options['type'] === 'new') {
+            $builder
+                ->add('thumbnail', FileType::class, array('label' => 'Image miniature 300px / 300px'))
+                ->add('image', FileType::class, array('label' => 'Image grand format'))
+            ;
+        }
     }
 
     /**
@@ -39,6 +44,7 @@ class PaintingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+            'type' => null,
             'data_class' => 'AdminBundle\Entity\Painting'
         ));
     }
