@@ -17,7 +17,7 @@ class ContactController extends Controller
             $message = \Swift_Message::newInstance()
                 ->setSubject('Contact from pygervais.com')
                 ->setFrom($request->request->get('cemail'))
-                ->setTo('charliebreval@gmail.com')
+                ->setTo('pierreyvesgervais@hotmail.com')
                 ->setBody($body,'text/html')
             ;
             $mailStatus = $this->get('mailer')->send($message);
