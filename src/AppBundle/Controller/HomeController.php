@@ -17,11 +17,16 @@ class HomeController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $locale = $request->getLocale();
         $stack = $this->get('request_stack');
         $masterRequest = $stack->getMasterRequest();
         $posts = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Post')->findBy([], [
             'createdAt' => 'DESC',
         ], 10);
+
+        foreach ($posts as $post) {
+            $post->translate($locale);
+        }
 
         return $this->render('AppBundle:Home:index.html.twig', [
             'posts' => $posts

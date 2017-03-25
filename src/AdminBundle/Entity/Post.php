@@ -111,6 +111,27 @@ class Post
      */
     private $likes;
 
+    public function translate($locale)
+    {
+        switch ($locale) {
+            case 'en':
+                if ($titleEn !== null) {
+                    $this->setTitle($this->getTitleEn());
+                }
+                if ($synopsisEn !== null) {
+                    $this->setSynopsis($this->getSynopsisEn());
+                }
+                if ($bodyEn !== null) {
+                    $this->setBody($this->getBodyEn());
+                }
+                break;
+
+            default:
+                # code...
+                break;
+        }
+    }
+
     public function increaseLikes()
     {
         $this->setLikes($this->getLikes() + 1);

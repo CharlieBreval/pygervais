@@ -12,6 +12,8 @@ class BlogController extends Controller
 {
     public function showAction(Request $request, Post $post)
     {
+        $locale = $request->getLocale();
+
         if ($request->getMethod() === 'POST') {
             $params = $request->request->all();
 
@@ -26,6 +28,9 @@ class BlogController extends Controller
             $em->persist($comment);
             $em->flush();
         }
+
+        $post->translate($locale);
+
         return $this->render('AppBundle:Blog:show.html.twig', [
             'post' => $post
         ]);
