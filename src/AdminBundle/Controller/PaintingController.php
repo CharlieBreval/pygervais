@@ -75,8 +75,8 @@ class PaintingController extends Controller
                 $imageFilename
             );
 
-            $painting->setImage($imageFilename);
-            $painting->setThumbnail($thumbnailFilename);
+            $painting->setImage('img/uploads/painting/thumbnail/'.$imageFilename);
+            $painting->setThumbnail('img/uploads/painting/image/'.$thumbnailFilename);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($painting);
