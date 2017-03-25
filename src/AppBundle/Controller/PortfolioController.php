@@ -18,10 +18,7 @@ class PortfolioController extends Controller
             'slug' => $categorySlug
         ]);
 
-        $subcategory = $manager->getRepository('AdminBundle:Subcategory')->getByCategoryAndSlug([
-            'category' => $category,
-            'slug' => $subcategorySlug
-        ]);
+        $subcategory = $manager->getRepository('AdminBundle:Subcategory')->getByCategoryAndSlug($category, $subcategorySlug);
 
         foreach ($subcategory->getPaintings() as $painting) {
             $painting->translate($locale);

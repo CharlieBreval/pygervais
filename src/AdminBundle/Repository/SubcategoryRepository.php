@@ -19,11 +19,11 @@ class SubcategoryRepository extends \Doctrine\ORM\EntityRepository
             ->innerJoin('subcat.paintings', 'p')
             ->where('subcat.category = :category')
             ->andWhere('subcat.slug = :slug')
-            ->orderBy('subcat.createdAt', 'ASC')
+            ->orderBy('p.createdAt', 'ASC')
             ->setParameter('slug', $slug)
-            ->setParameter('category', $categoy)
+            ->setParameter('category', $category)
         ;
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 }
