@@ -20,6 +20,7 @@ class SubcategoryRepository extends \Doctrine\ORM\EntityRepository
             ->where('subcat.category = :category')
             ->andWhere('subcat.slug = :slug')
             ->orderBy('p.createdAt', 'ASC')
+            ->orderBy('p.id', 'ASC')
             ->setParameter('slug', $slug)
             ->setParameter('category', $category)
         ;
