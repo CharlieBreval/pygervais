@@ -5,6 +5,7 @@ namespace AdminBundle\Form;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,8 +25,8 @@ class PaintingType extends AbstractType
             ->add('title')
             ->add('titleEn')
             ->add('subcategory')
-            ->add('thumbnail')
-            ->add('image')
+            ->add('thumbnail', FileType::class, array('label' => 'Image miniature 300px / 300px'))
+            ->add('image', FileType::class, array('label' => 'Image grand format'))
             ->add('createdAt', DateType::class, array(
                 'years' => $years
             ));

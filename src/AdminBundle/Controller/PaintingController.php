@@ -5,6 +5,7 @@ namespace AdminBundle\Controller;
 use AdminBundle\Entity\Painting;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -55,6 +56,25 @@ class PaintingController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $thumbnail = $painting->getThumbnail();
+            $image = $painting->getImage();
+
+            $thumbnailFilename = random_int(0, 100).'_'.$thumbnail->getClientOriginalName();
+            $thumbnail->move(
+                $this->getParameter('painting_thumbnail_directory'),
+                $thumbnailFilename
+            );
+
+            $imageFilename = random_int(0, 100).'_'.$image->getClientOriginalName();
+            $image->move(
+                $this->getParameter('painting_image_directory'),
+                $imageFilename
+            );
+
+            $painting->setImage($imageFilename);
+            $painting->setThumbnail($thumbnailFilename);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($painting);
             $em->flush($painting);
@@ -88,6 +108,13 @@ class PaintingController extends Controller
      */
     public function editAction(Request $request, Painting $painting)
     {
+        $painting->setImage(
+            new File($this->getParameter('painting_image_directory').'/'.$painting->getImage())
+        );
+        $painting->setThumbnail(
+            new File($this->getParameter('painting_thumbnail_directory').'/'.$painting->getThumbnail())
+        );
+
         $deleteForm = $this->createDeleteForm($painting);
         $editForm = $this->createForm('AdminBundle\Form\PaintingType', $painting);
         $editForm->handleRequest($request);

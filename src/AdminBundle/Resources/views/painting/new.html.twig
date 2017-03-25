@@ -4,6 +4,7 @@
     <h3>Painting creation</h3>
 
     {{ form_start(form) }}
+        {{ form_errors(form)}}
         {{ form_row(form.subcategory)}}
         {{ form_row(form.title)}}
         <button class="btn" type="button" data-toggle="collapse" data-target="#titleEn" aria-expanded="false" aria-controls="collapseExample">Anglais</button>
