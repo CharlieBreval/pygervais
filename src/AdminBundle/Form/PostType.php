@@ -39,6 +39,7 @@ class PostType extends AbstractType
             $builder
                 ->add('thumbnail', FileType::class, array('label' => 'Image miniature'))
                 ->add('cover', FileType::class, array('label' => 'Image grand format'))
+            ;
         }
     }
 
