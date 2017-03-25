@@ -47,6 +47,19 @@ class Category
      */
     private $titleEn;
 
+    public function translate($locale)
+    {
+        switch ($locale) {
+            case 'en':
+                $this->setTitle($this->getTitleEn());
+                break;
+
+            default:
+                # code...
+                break;
+        }
+    }
+
     public function __toString()
     {
         return $this->getTitle();

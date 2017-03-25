@@ -62,6 +62,19 @@ class Painting
      */
     private $createdAt;
 
+    public function translate($locale)
+    {
+        switch ($locale) {
+            case 'en':
+                $this->setTitle($this->getTitleEn());
+                break;
+
+            default:
+                # code...
+                break;
+        }
+    }
+
     /**
      * Get id
      *

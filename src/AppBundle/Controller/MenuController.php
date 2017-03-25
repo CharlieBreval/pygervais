@@ -16,9 +16,10 @@ class MenuController extends Controller
      */
     public function menuAction(Request $request)
     {
-        $stack = $this->get('request_stack');
+        $locale        = $request->getLocale();
+        $stack         = $this->get('request_stack');
         $masterRequest = $stack->getMasterRequest();
-        $currentRoute = $masterRequest->get('_route');
+        $currentRoute  = $masterRequest->get('_route');
 
         $categories = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Category')
             ->createQueryBuilder('c')
@@ -27,6 +28,14 @@ class MenuController extends Controller
             ->getQuery()
             ->getResult()
         ;
+
+        foreach ($categories as $category) {
+            $category->translate($locale);
+
+            foreach ($category->getSubcategories() as $subcategory) {
+                $subcategory->translate($locale);
+            }
+        }
 
         return $this->render('AppBundle:Menu:menu.html.twig', [
             'categories' => $categories,

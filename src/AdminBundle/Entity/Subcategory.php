@@ -52,6 +52,20 @@ class Subcategory
      * @ORM\Column(name="title_en", type="string", length=255, nullable=true)
      */
     private $titleEn;
+
+    public function translate($locale)
+    {
+        switch ($locale) {
+            case 'en':
+                $this->setTitle($this->getTitleEn());
+                break;
+
+            default:
+                # code...
+                break;
+        }
+    }
+
     /**
      * Constructor
      */
