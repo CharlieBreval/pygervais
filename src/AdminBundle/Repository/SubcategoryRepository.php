@@ -2,6 +2,8 @@
 
 namespace AdminBundle\Repository;
 
+use AdminBundle\Entity\Category;
+
 /**
  * SubcategoryRepository
  *
@@ -10,4 +12,18 @@ namespace AdminBundle\Repository;
  */
 class SubcategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getByCategoryAndSlug(Category $category, $slug)
+    {
+        $qb = $this->createQueryBuilder('subcat')
+            ->addSelect('p')
+            ->innerJoin('subcat.paintings', 'p')
+            ->where('subcat.category = :category')
+            ->andWhere('subcat.slug = :slug')
+            ->orderBy('subcat.createdAt', 'ASC')
+            ->setParameter('slug', $slug)
+            ->setParameter('category', $categoy)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

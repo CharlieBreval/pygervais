@@ -18,7 +18,7 @@ class PortfolioController extends Controller
             'slug' => $categorySlug
         ]);
 
-        $subcategory = $manager->getRepository('AdminBundle:Subcategory')->findOneBy([
+        $subcategory = $manager->getRepository('AdminBundle:Subcategory')->getByCategoryAndSlug([
             'category' => $category,
             'slug' => $subcategorySlug
         ]);
