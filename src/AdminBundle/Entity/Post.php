@@ -115,13 +115,13 @@ class Post
     {
         switch ($locale) {
             case 'en':
-                if ($titleEn !== null) {
+                if ($this->titleEn !== null) {
                     $this->setTitle($this->getTitleEn());
                 }
-                if ($synopsisEn !== null) {
+                if ($this->synopsisEn !== null) {
                     $this->setSynopsis($this->getSynopsisEn());
                 }
-                if ($bodyEn !== null) {
+                if ($this->bodyEn !== null) {
                     $this->setBody($this->getBodyEn());
                 }
                 break;

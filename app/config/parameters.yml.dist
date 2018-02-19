@@ -1,21 +1,18 @@
-# This file is a "template" of what your parameters.yml file should look like
-# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
-# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
     database_host:     127.0.0.1
     database_port:     ~
-    database_name:     symfony
+    database_name:     pygervais
     database_user:     root
-    database_password: ~
-    # You should uncomment this if you want use pdo_sqlite
-    # database_path: "%kernel.root_dir%/data.db3"
+    database_password: root
 
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
-    mailer_user:       ~
-    mailer_password:   ~
+    mailer_transport: mail
+    mailer_auth_mode: login
+    mailer_host: ns0.ovh.net
+    mailer_encryption: null
+    mailer_port: 587
+    mailer_user: bonjour@charliebreval.com
+    mailer_password: Tyranides25
 
-    # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
     painting_thumbnail_directory: '%kernel.root_dir%/../web/img/uploads/painting/thumbnail'
     painting_image_directory: '%kernel.root_dir%/../web/img/uploads/painting/image'
